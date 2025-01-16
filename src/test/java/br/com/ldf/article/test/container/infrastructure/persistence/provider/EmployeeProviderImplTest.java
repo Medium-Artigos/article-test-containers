@@ -91,6 +91,23 @@ class EmployeeProviderImplTest {
     }
 
     @Test
+    void shouldGetByNameSuccessfully() {
+        when(employeeRepository.findByName("John Doe")).thenReturn(Optional.of(employeeEntity));
+
+        Employee result = employeeProvider.getByName("John Doe");
+
+        assertEquals(employee, result);
+        verify(employeeRepository, times(1)).findByName("John Doe");
+    }
+
+    @Test
+    void shouldThrowExceptionWhenGetByNameEmployeeThatDoesNotExist() {
+        when(employeeRepository.findByName("John Doe")).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () -> employeeProvider.getByName("John Doe"));
+    }
+
+    @Test
     void shouldGetByIdSuccessfully() {
         when(employeeRepository.findById(anyLong())).thenReturn(Optional.of(employeeEntity));
 

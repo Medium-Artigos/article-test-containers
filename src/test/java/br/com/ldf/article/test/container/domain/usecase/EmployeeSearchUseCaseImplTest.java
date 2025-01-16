@@ -33,4 +33,15 @@ class EmployeeSearchUseCaseImplTest {
         assertEquals(employee, result);
         verify(employeeProvider, times(1)).getById(1L);
     }
+
+    @Test
+    void getByNameTest() {
+        Employee employee = new Employee(null, "John Doe", new BigDecimal("10000"));
+        when(employeeProvider.getByName(anyString())).thenReturn(employee);
+
+        Employee result = employeeSearchUseCase.getByName("John Doe");
+
+        assertEquals(employee, result);
+        verify(employeeProvider, times(1)).getByName("John Doe");
+    }
 }

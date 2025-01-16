@@ -19,4 +19,9 @@ public class EmployeeSearchUseCaseImpl implements EmployeeSearchUseCase {
         return employeeProvider.getById(id);
     }
 
+    @Override
+    public Employee getByName(String name) {
+        return employeeProvider.getByName(name);
+    }
+
 }

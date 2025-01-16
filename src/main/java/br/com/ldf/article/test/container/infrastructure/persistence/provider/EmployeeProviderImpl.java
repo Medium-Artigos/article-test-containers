@@ -28,6 +28,13 @@ public class EmployeeProviderImpl implements EmployeeProvider {
     }
 
     @Override
+    public Employee getByName(String name) {
+        return repository.findByName(name)
+                .map(mapper::toModel)
+                .orElseThrow(() -> new EntityNotFoundException("Employee not found"));
+    }
+
+    @Override
     public Employee save(Employee employee) {
         var employeePersisted = repository.save(mapper.toEntity(employee));
         return mapper.toModel(employeePersisted);

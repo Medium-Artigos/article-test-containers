@@ -30,6 +30,11 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeSearchUseCase.getById(id));
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Employee> getByName(@RequestParam String name) {
+        return ResponseEntity.ok(employeeSearchUseCase.getByName(name));
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> create(@RequestBody @Validated EmployeeRequest request) {
         var employee = employeeChangeUseCase.create(mapper.mapToModel(request));

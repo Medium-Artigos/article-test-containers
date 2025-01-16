@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -48,6 +49,24 @@ class EmployeeControllerTest {
 
         mockMvc.perform(get(EmployeeController.EMPLOYEES_API_PATH + "/{id}", 1L)
                         .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.name").value("John Doe"))
+                .andExpect(jsonPath("$.salary").value(new BigDecimal("10000")));
+    }
+
+    @Test
+    void testGetByName() throws Exception {
+        mockMvc = MockMvcBuilders.standaloneSetup(employeeController).build();
+        Employee employee = new Employee(1L, "John Doe", new BigDecimal("10000"));
+        when(employeeSearchUseCase.getByName("John Doe")).thenReturn(employee);
+
+        mockMvc.perform(get(EmployeeController.EMPLOYEES_API_PATH)
+                        .queryParam("name", "John Doe")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1L))
