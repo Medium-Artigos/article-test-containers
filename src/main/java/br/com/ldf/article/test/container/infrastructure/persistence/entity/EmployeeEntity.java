@@ -1,10 +1,11 @@
-package br.com.ldf.article.test.container.infraestructure.persistence.entity;
+package br.com.ldf.article.test.container.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "employee")
@@ -21,4 +22,18 @@ public class EmployeeEntity {
     String name;
     @Column(name = "salary", nullable = false)
     BigDecimal salary;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EmployeeEntity that = (EmployeeEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }

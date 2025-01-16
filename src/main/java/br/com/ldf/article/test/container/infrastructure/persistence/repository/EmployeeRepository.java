@@ -1,6 +1,6 @@
-package br.com.ldf.article.test.container.infraestructure.persistence.repository;
+package br.com.ldf.article.test.container.infrastructure.persistence.repository;
 
-import br.com.ldf.article.test.container.infraestructure.persistence.entity.EmployeeEntity;
+import br.com.ldf.article.test.container.infrastructure.persistence.entity.EmployeeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

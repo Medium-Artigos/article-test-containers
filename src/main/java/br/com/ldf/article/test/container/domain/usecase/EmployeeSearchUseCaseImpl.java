@@ -5,8 +5,6 @@ import br.com.ldf.article.test.container.domain.model.Employee;
 import br.com.ldf.article.test.container.domain.provider.EmployeeProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,8 +19,4 @@ public class EmployeeSearchUseCaseImpl implements EmployeeSearchUseCase {
         return employeeProvider.getById(id);
     }
 
-    @Override
-    public Page<Employee> getAll(Pageable pageable) {
-        return employeeProvider.getAll(pageable);
-    }
 }

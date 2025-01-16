@@ -1,16 +1,14 @@
-package br.com.ldf.article.test.container.infraestructure.persistence.provider;
+package br.com.ldf.article.test.container.infrastructure.persistence.provider;
 
 import br.com.ldf.article.test.container.domain.exceptions.EntityNotFoundException;
 import br.com.ldf.article.test.container.domain.model.Employee;
 import br.com.ldf.article.test.container.domain.provider.EmployeeProvider;
-import br.com.ldf.article.test.container.infraestructure.persistence.mapper.EmployeeMapper;
-import br.com.ldf.article.test.container.infraestructure.persistence.repository.EmployeeRepository;
+import br.com.ldf.article.test.container.infrastructure.persistence.mapper.EmployeeInfrastructureMapper;
+import br.com.ldf.article.test.container.infrastructure.persistence.repository.EmployeeRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -20,12 +18,7 @@ import org.springframework.stereotype.Service;
 public class EmployeeProviderImpl implements EmployeeProvider {
 
     EmployeeRepository repository;
-    EmployeeMapper mapper;
-
-    @Override
-    public Page<Employee> getAll(Pageable pageable) {
-        return repository.findAll(pageable).map(mapper::toModel);
-    }
+    EmployeeInfrastructureMapper mapper;
 
     @Override
     public Employee getById(Long id) {

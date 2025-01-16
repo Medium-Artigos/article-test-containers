@@ -6,8 +6,6 @@ import br.com.ldf.article.test.container.application.usecase.EmployeeChangeUseCa
 import br.com.ldf.article.test.container.application.usecase.EmployeeSearchUseCase;
 import br.com.ldf.article.test.container.domain.model.Employee;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -26,11 +24,6 @@ public class EmployeeController {
     private final EmployeeChangeUseCase employeeChangeUseCase;
     private final EmployeeSearchUseCase employeeSearchUseCase;
     private final EmployeeApplicationMapper mapper;
-
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<Employee>> getAll(Pageable pageable) {
-        return ResponseEntity.ok(employeeSearchUseCase.getAll(pageable));
-    }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Employee> getById(@PathVariable Long id) {
